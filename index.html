@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshay Kumar | Sports Fan Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cricket: #1a6b3c;
+    --cricket-light: #2ecc71;
+    --kabaddi: #c0392b;
+    --kabaddi-light: #e74c3c;
+    --gold: #f39c12;
+    --dark: #0a0a0a;
+    --card: #111;
+    --text: #f0f0f0;
+    --muted: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: 
+      radial-gradient(ellipse at top left, #1a6b3c44 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, #c0392b44 0%, transparent 50%),
+      linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 40px 20px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-tag {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 15vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeDown 0.8s 0.2s ease both;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem;
+    color: var(--muted);
+    letter-spacing: 3px;
+    margin-top: 8px;
+    animation: fadeDown 0.8s 0.4s ease both;
+  }
+
+  .hero-village {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    animation: fadeDown 0.8s 0.6s ease both;
+  }
+
+  .sports-badges {
+    display: flex;
+    gap: 16px;
+    margin-top: 30px;
+    animation: fadeDown 0.8s 0.8s ease both;
+  }
+
+  .badge {
+    padding: 10px 28px;
+    border-radius: 4px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .badge-cricket {
+    background: var(--cricket);
+    border: 1px solid var(--cricket-light);
+    color: #fff;
+    box-shadow: 0 0 20px #1a6b3c66;
+  }
+
+  .badge-kabaddi {
+    background: var(--kabaddi);
+    border: 1px solid var(--kabaddi-light);
+    color: #fff;
+    box-shadow: 0 0 20px #c0392b66;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 1;
+    margin-bottom: 40px;
+  }
+
+  /* FANS SECTION */
+  .fans-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .fans-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 4rem; }
+  }
+
+  .fan-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .fan-card:hover { transform: scale(1.02); }
+
+  .fan-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fan-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .cricket-card .fan-card-overlay {
+    background: linear-gradient(to top, #1a6b3cee 0%, #1a6b3c55 40%, transparent 70%);
+  }
+
+  .kabaddi-card .fan-card-overlay {
+    background: linear-gradient(to top, #c0392bee 0%, #c0392b55 40%, transparent 70%);
+  }
+
+  .fan-sport-tag {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .fan-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .fan-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .fan-star {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--gold);
+    color: #000;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+  }
+
+  /* SOCIAL CARDS */
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .social-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .social-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+  }
+
+  .social-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .ig-icon { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .ff-icon { background: linear-gradient(135deg, #ff6a00, #ee0979); }
+  .village-icon { background: linear-gradient(135deg, #134e5e, #71b280); }
+
+  .social-info {}
+  .social-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', monospace;
+  }
+  .social-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 4px;
+    word-break: break-all;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 0 20px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--gold); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🏆 Sports Fan Page</div>
+  <div class="hero-name">AKSHAY<br>KUMAR</div>
+  <div class="hero-sub">Cricket &nbsp;•&nbsp; Kabaddi</div>
+  <div class="hero-village">📍 Kortagudem Village</div>
+  <div class="sports-badges">
+    <div class="badge badge-cricket">🏏 Cricket</div>
+    <div class="badge badge-kabaddi">💪 Kabaddi</div>
+  </div>
+</div>
+
+<!-- MY FAVORITE PLAYERS -->
+<section class="reveal">
+  <div class="section-label">❤️ My Favorites</div>
+  <div class="section-title">MY SPORTS<br>ICONS</div>
+  <div class="fans-grid">
+
+    <!-- Rohit Sharma -->
+    <div class="fan-card cricket-card">
+      <img src="/mnt/user-data/uploads/rohit.webp" alt="Rohit Sharma" onerror="this.style.background='#1a6b3c';this.src='';this.alt='Rohit Sharma'">
+      <div class="fan-card-overlay">
+        <div class="fan-sport-tag">🏏 Cricket Fan</div>
+        <div class="fan-name">ROHIT<br>SHARMA</div>
+        <div class="fan-desc">The Hitman — Captain of India, 🏆 ODI World Cup winner, record-breaking batsman</div>
+      </div>
+      <div class="fan-star">⭐ MY IDOL</div>
+    </div>
+
+    <!-- Arjun (Kabaddi) -->
+    <div class="fan-card kabaddi-card">
+      <img src="/mnt/user-data/uploads/arjun.jfif" alt="Arjun - Kabaddi" onerror="this.style.background='#c0392b';this.src='';this.alt='Arjun'">
+      <div class="fan-card-overlay">
+        <div class="fan-sport-tag">💪 Kabaddi Fan</div>
+        <div class="fan-name">ARJUN</div>
+        <div class="fan-desc">Pro Kabaddi warrior — power, speed, and unstoppable on the mat 🔥</div>
+      </div>
+      <div class="fan-star">⭐ MY IDOL</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOCIAL & INFO -->
+<section class="reveal">
+  <div class="section-label">🌐 Find Me Online</div>
+  <div class="section-title">MY PROFILES<br>& INFO</div>
+  <div class="social-grid">
+
+    <div class="social-card">
+      <div class="social-icon ig-icon">📸</div>
+      <div class="social-info">
+        <div class="social-label">Instagram</div>
+        <div class="social-value">@akshay_kumar_edit</div>
+      </div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon ff-icon">🔥</div>
+      <div class="social-info">
+        <div class="social-label">Free Fire ID</div>
+        <div class="social-value">akshay_kumar_edit</div>
+      </div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon village-icon">🏡</div>
+      <div class="social-info">
+        <div class="social-label">Village</div>
+        <div class="social-value">Kortagudem</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  Made with ❤️ for &nbsp;<span>Akshay Kumar</span>&nbsp; • Sports Fan &nbsp;|&nbsp; Kortagudem
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
